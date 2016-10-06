@@ -4,7 +4,7 @@ var Planet = function(){
         size: Math.random()*(100-10)+10,
         speed: Math.random()*(10-1)+1, //px/seg
         color:"#AAA",
-        orbit_size:Math.random()*(800-200)+200,
+        orbit_size:Math.random()*(400-200)+200,
         orbit_position:Math.random()*360,
         getSize:function(){
           return this.size+'px';
@@ -20,8 +20,8 @@ var Planet = function(){
           span.style.width = this.getSize();
           span.style.height = this.getSize();
           li.style.position = "relative";
-          li.style.width=this.orbit_size;
-          li.style.height = this.orbit_size;
+          li.style.width=this.orbit_size+'px';
+          li.style.height = this.orbit_size+'px';
           span.style.position = "absolute";
           span.style.bottom = 0;
           span.style.right = 0;
@@ -35,6 +35,17 @@ var number_planet =9;
 var planets = [];
 
 while(number_planet -- > 0){
+
   planets.push(Planet());
 }
 console.log(planets);
+
+document.addEventListener('DOMContentLoaded',function(event){
+  var dom_parent = document.querySelector('ul .planets');
+
+  for(var key in planets){
+    planets[key].pushDomElement(dom_parent);
+  }
+
+
+});
